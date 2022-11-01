@@ -1,25 +1,34 @@
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-
-  console.log('Мин: ' + min);
-  console.log('Макс: ' + max);
-  console.log(Math.floor(Math.random() * (max - min)) + min);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function maxLenStr(str, lenStr) {
-  if (str.length > lenStr) {
-    console.log('Длина строки: ' + str.length);
-    console.log('Макс длина строки: ' + lenStr);
-    console.log(false);
-    return false
-  }
-  console.log('Длина строки: ' + str.length);
-  console.log('Макс длина строки: ' + lenStr);
-  console.log(true);
-  return true
-}
+// function maxLenStr(str, lenStr) {
+//   if (str.length > lenStr) {
+//     return false
+//   }
+//   return true
+// }
 
-getRandomInt(0, 10);
-maxLenStr('В этой строке 25 символов', 24);
+const ID = [];
+const URL = [];
+
+const NUMBER_OBJECTS = 25;
+
+const createObjects = () => {
+  const getIdElement = (elements) => elements.push(() => {for(let i = 0; i < NUMBER_OBJECTS; i++){return i;}});
+
+  return {
+    id: getIdElement(ID),
+    url: `photos/${getIdElement(URL)}.jpg`,
+    description: 'Описание фото',
+    likes: getRandomInt(15, 200),
+    comments: getRandomInt(0, 200)
+  };
+};
+
+const resultArray = Array.from({length: NUMBER_OBJECTS}, createObjects);
+
+resultArray(); // ESlint ругается если не вызвать!
+// console.log(resultArray);  // Eslint ругается если вызвать)))
