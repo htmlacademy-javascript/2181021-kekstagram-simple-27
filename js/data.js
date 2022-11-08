@@ -14,4 +14,4 @@ const createObjects = () => ({
 
 const getDataGeneretion = Array.from({length: NUMBER_OBJECTS}, createObjects);
 
-export {getDataGeneretion};
+export {NUMBER_OBJECTS, getDataGeneretion};
