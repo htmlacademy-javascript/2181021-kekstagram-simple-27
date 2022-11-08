@@ -1,3 +1,4 @@
+import {NUMBER_OBJECTS} from './data.js';
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -6,5 +7,4 @@ function getRandomInt(min, max) {
 
 const getIdElement = (elements) => elements.push(() => {for(let i = 0; i < NUMBER_OBJECTS; i++){return i;}});
 
-
-export {getRandomInt, getIdElement}
+export {getRandomInt, getIdElement};

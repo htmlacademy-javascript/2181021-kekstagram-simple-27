@@ -1,3 +1,3 @@
-import {getDataGeneretion} from "./data.js";
+import {getDataGeneretion} from './data.js';
 
 getDataGeneretion();
