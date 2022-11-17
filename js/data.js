@@ -12,6 +12,6 @@ const createObjects = () => ({
   comments: getRandomInt(0, 200)
 });
 
-const getDataGeneretion = Array.from({length: NUMBER_OBJECTS}, createObjects);
+const getDataGeneretion = () => Array.from({length: NUMBER_OBJECTS}, createObjects);
 
 export {NUMBER_OBJECTS, getDataGeneretion};
