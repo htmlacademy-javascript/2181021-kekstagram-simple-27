@@ -1,3 +1,4 @@
-import {getDataGeneretion} from './data.js';
+import {imageRendering} from './image-rendering.js';
 
-getDataGeneretion();
+
+imageRendering();
