@@ -520,6 +520,7 @@ main {
   display: block;
   max-width: 600px;
   max-height: 600px;
+  transform: scale(1);
 }
 
 
@@ -694,6 +695,14 @@ main {
   color: #000000;
 
   border-radius: 5px;
+}
+
+.text__label.has-danger textarea{
+  outline: 2px solid #e90000;
+}
+
+.text__error {
+  color: #e90000;
 }
 
 .text__description {
