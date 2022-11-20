@@ -40,12 +40,14 @@ const loadImage = () => {
         }
       });
     });
+
     submitButton.addEventListener('click', (evt) => {
       const isValid = pristine.validate();
       if (!isValid){
         evt.preventDefault();
       }
     });
+
     for (const effectButton of effectButtons){
       effectButton.addEventListener('click', () => {
         for (const effect of imageEffect){
