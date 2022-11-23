@@ -1,6 +1,8 @@
-import {imageRendering} from './image-rendering.js';
-import {loadImage} from './load-image.js';
+import {uploadModalClose} from './modal.js';
+import {postForm} from './form.js';
+import {getData} from './api.js';
+import {transformEffects} from './effects.js';
 
-
-imageRendering();
-loadImage();
+getData();
+transformEffects();
+postForm(uploadModalClose);
