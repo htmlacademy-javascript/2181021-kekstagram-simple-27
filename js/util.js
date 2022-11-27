@@ -1,3 +1,6 @@
+import { closeModal } from './modal.js';
+
+const body = document.querySelector('body');
 const uploadFile = document.querySelector('#upload-file');
 const submitButton = document.querySelector('#upload-submit');
 const successPopupTemplate = document.querySelector('#success').content;
@@ -8,6 +11,10 @@ const scaleValue = document.querySelector('.scale__control--value');
 const imagePreview = document.querySelector('.img-upload__preview img');
 const noneEffect = document.querySelector('#effect-none');
 const textDescription = document.querySelector('.text__description');
+
+const isEscape = (evt) => (
+  evt.key === 'Escape'
+);
 
 const showAlert = (message, color = 'red') => {
   const alertContainer = document.createElement('div');
@@ -45,34 +52,47 @@ const clearForm = () => {
   textDescription.value = '';
 };
 
-const succesPopup = () => {
-  document.querySelector('body').appendChild(cloneSuccessPopupTemplate);
+const showSuccesPopup = () => {
+  body.appendChild(cloneSuccessPopupTemplate);
   const popup = document.querySelector('.success');
   const successPopupButton = document.querySelector('.success__button');
-  successPopupButton.addEventListener('click', () => {
-    popup.remove();
-    clearForm();
-  });
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
+  const onModalEscapeKeydown = (evt) => {
+    if (isEscape(evt)) {
       popup.remove();
       clearForm();
     }
+  };
+
+  successPopupButton.addEventListener('click', () => {
+    popup.remove();
+    clearForm();
+    closeModal();
+    document.removeEventListener('keydown', onModalEscapeKeydown);
   });
+
+  document.addEventListener('keydown', onModalEscapeKeydown, { once: true });
 };
 
-const errorPopup = () => {
-  document.querySelector('body').appendChild(cloneErrorPopupTemplate);
+const showErrorPopup = () => {
+  body.appendChild(cloneErrorPopupTemplate);
   const popup = document.querySelector('.error');
   const errorPopupButton = document.querySelector('.error__button');
+
+  const onModalEscapeKeydown = (evt) => {
+    if (isEscape(evt)) {
+      popup.remove();
+      clearForm();
+
+    }
+  };
+
   errorPopupButton.addEventListener('click', () => {
     popup.remove();
+    document.removeEventListener('keydown', onModalEscapeKeydown);
   });
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      popup.remove();
-    }
-  });
+
+  document.addEventListener('keydown', onModalEscapeKeydown, { once: true });
 };
 
-export { showAlert, blockSubmitButton, unblockSubmitButton, succesPopup, errorPopup, clearForm };
+
+export { showAlert, blockSubmitButton, unblockSubmitButton, showSuccesPopup , showErrorPopup, clearForm, isEscape , body };

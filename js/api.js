@@ -1,9 +1,10 @@
 import { imageRendering } from './image-rendering.js';
 import { showAlert } from './util.js';
 
-
+const GETURL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
+const POSTURL = 'https://27.javascript.pages.academy/kekstagram-simple/';
 const getData = () => {
-  fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
+  fetch(GETURL)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -19,7 +20,7 @@ const getData = () => {
 
 const sendData = (onSuccess, onError, body) => {
   fetch(
-    'https://27.javascript.pages.academy/kekstagram-simple/',
+    POSTURL,
     {
       method: 'POST',
       body,

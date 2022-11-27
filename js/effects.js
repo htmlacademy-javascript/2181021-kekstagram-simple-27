@@ -6,7 +6,7 @@ const effectLevel = document.querySelector('.effect-level');
 const effectButtons = document.querySelectorAll('.effects__radio');
 const effectNone = document.querySelector('#effect-none');
 
-const effects = {
+const EFFECTS = {
   chrome: {
     min: 0,
     max: 1,
@@ -50,28 +50,26 @@ const transformEffects = () => {
   });
   for (const effectButton of effectButtons){
     effectButton.addEventListener('click', () => {
-      for (const effect in effects){
+      for (const effect in EFFECTS){
         if (effectButton.value === effect){
           uploadedPicture.removeAttribute('class');
           uploadedPicture.classList.add(`effects__preview--${effect}`);
           slider.noUiSlider.updateOptions({
             range: {
-              min: effects[effect].min,
-              max: effects[effect].max
+              min: EFFECTS[effect].min,
+              max: EFFECTS[effect].max
             },
-            start: effects[effect].max
+            start: EFFECTS[effect].max
           });
           const previewEffect = document.querySelector(`.effects__preview--${effect}`);
           slider.noUiSlider.on('update', () => {
-            previewEffect.style.filter = effects[effect].setFilter(slider.noUiSlider.get());
+            previewEffect.style.filter = EFFECTS[effect].setFilter(slider.noUiSlider.get());
             sliderValue.value = slider.noUiSlider.get();
           });
         }
-        if (effectNone.checked === true) {
-          effectLevel.classList.add('hidden');
-        } else {
-          effectLevel.classList.remove('hidden');
-        }
+        const checkEffectNone = () => effectNone.checked === true ? effectLevel.classList.add('hidden') : effectLevel.classList.remove('hidden');
+        checkEffectNone();
+
       }
     });
   }
