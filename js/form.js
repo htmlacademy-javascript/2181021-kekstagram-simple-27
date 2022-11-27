@@ -1,5 +1,5 @@
-import { uploadModalOpen, uploadModalClose, uploadModalCloseEscape, closeOptionButton} from './modal.js';
-import { blockSubmitButton, unblockSubmitButton, succesPopup , errorPopup} from './util.js';
+import { openModal, closeModal, closeModalEscape, closeOptionButton} from './modal.js';
+import { blockSubmitButton, unblockSubmitButton, showSuccesPopup , showErrorPopup} from './util.js';
 import { sendData } from './api.js';
 import { getPreviewImage } from './preview-image.js';
 
@@ -21,11 +21,11 @@ const postForm = (onSuccess) => {
       sendData(
         () => {
           unblockSubmitButton();
-          succesPopup();
+          showSuccesPopup();
           onSuccess();
         },
         () => {
-          errorPopup();
+          showErrorPopup();
           unblockSubmitButton();
         },
         new FormData(evt.target),
@@ -35,11 +35,10 @@ const postForm = (onSuccess) => {
 
   uploadInput.addEventListener('change', () => {
     getPreviewImage();
-    uploadModalOpen();
-    closeOptionButton.addEventListener('click', () => {
-      uploadModalClose();
-    });
-    uploadModalCloseEscape();
+    openModal();
+    closeModalEscape();
+    closeOptionButton.addEventListener('click', () => {closeModal();});
+
   });
 };
 
